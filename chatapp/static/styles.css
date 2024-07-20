@@ -2,6 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     padding: 20px;
 
@@ -110,4 +111,42 @@ h1 {
     padding: 15px;
     border-radius: 3px;
     flex-grow: 2;
+}
+
+#complexity :not(.keep){
+    display: none;
+}
+
+#complexity:hover :not(.keep){
+    display: block;
+}
+
+#complexity {
+    color: white;
+    width: 50px;
+    display:flex;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--coolor-blue-accent);
+    border-radius: 20px;
+    padding: 10px
+}
+#complexity img {
+    width: 50px;
+}
+#complexity H5{
+    text-align: center;
+    margin: 0;
+}
+.slider-input {
+    writing-mode: vertical-lr;
+    direction: rtl;
+    appearance: slider-vertical;
+    width: 16px;
+    vertical-align: bottom;
+    /* transform: rotate(270deg); Rotate container to make slider vertical */
+    /* transform-origin: 0 0; Set rotation origin to top-left corner */
 }
