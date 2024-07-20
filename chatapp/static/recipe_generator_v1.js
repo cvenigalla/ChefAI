@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fancyButton = document.getElementById('fancy-button');
     const veganButton = document.getElementById('vegan-button');
     const recipeOutput = document.getElementById('recipe-output');
-    const sindarinToggle = document.getElementById('sindarinToggle');
+    // const sindarinToggle = document.getElementById('sindarinToggle');
     console.log("Recipe Prompt:", recipePrompt);
     console.log("Generate Button:", generateButton);
     console.log("Spice Button:", spiceButton);
@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentRecipe = '';
     let sindarinState = false;
-    sindarinToggle.addEventListener('click', ()=>{
-        sindarinState = !sindarinState;
-        sindarinToggle.classList.toggle('active')
-    })
+    // sindarinToggle.addEventListener('click', ()=>{
+    //     sindarinState = !sindarinState;
+    //     sindarinToggle.classList.toggle('active')
+    // })
     function addButtonListener(button, action) {
         if (button) {
             button.addEventListener('click', action);
