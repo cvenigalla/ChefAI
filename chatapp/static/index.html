@@ -12,10 +12,6 @@
         <h1>ChefAI 👩‍🍳</h1>
         
         <div id="button-container">
-            <div class="slider">
-                <input type="range" min="1" max="5" value="1" class="slider-input" id="slider">
-                <output id="slider-value"></output>
-              </div>
             <button id="spice-button" class="recipe-button">🌶️ Spice it up!</button>
             <button id="simplify-button" class="recipe-button">🍽️ Simplify</button>
             <button id="fancy-button" class="recipe-button">✨ Make it Fancy</button>
@@ -33,6 +29,17 @@
 <div id="ingredientsList"></div>       
         </div>
     </div>
+    <div id="complexity">
+        
+        <img src="img/gordon.png">
+        
+        <div class="slider">
+            <input type="range" min="1" max="5" value="1"  orient="vertical" class="slider-input" id="slider">
+           
+          </div>
+          <output id="slider-value"></output>
+          <img src="img/patrick.png">
+          <h5 class="keep">Skill Level</h5>
     <script src="recipe_generator_v1.js"></script>
 </body>
 </html>
