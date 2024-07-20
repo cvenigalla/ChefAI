@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const spiceSlider = document.getElementById('slider');
     const spiceOutput = document.getElementById('slider-value');
     spiceOutput.textContent = slider.value;
-    const simplifyButton = document.getElementById('simplify-button');
     const fancyButton = document.getElementById('fancy-button');
     const veganButton = document.getElementById('vegan-button');
     const recipeOutput = document.getElementById('recipe-output');
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("Recipe Prompt:", recipePrompt);
     console.log("Generate Button:", generateButton);
     console.log("Spice Button:", spiceButton);
-    console.log("Simplify Button:", simplifyButton);
     console.log("Fancy Button:", fancyButton);
     console.log("Vegan Button:", veganButton);
     console.log("Recipe Output:", recipeOutput);
@@ -37,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addButtonListener(generateButton, generateRecipe);
     addButtonListener(spiceButton, () => modifyRecipe('spice'));
-    addButtonListener(simplifyButton, () => modifyRecipe('simplify'));
     addButtonListener(fancyButton, () => modifyRecipe('fancy'));
     addButtonListener(veganButton, () => modifyRecipe('vegan'));
 
