@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('videoUploadForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      
       var formData = new FormData();
       var videoFile = document.getElementById('videoFile').files[0];
+    //   console.log(document.getElementById('loading-spinner'));
+      document.getElementById('recipe-output').innerHTML = 'Analizing kitchen...';
       formData.append('video', videoFile);
-
       fetch('/api/analyze_kitchen', {
         method: 'POST',
         body: formData
@@ -56,15 +56,21 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(response => response.json())
       .then(data => {
         if (data.ingredients) {
-          document.getElementById('ingredientsList').innerHTML = '<h3>Ingredients Found:</h3><p>' + data.ingredients + '</p>';
+            document.getElementById('recipe-prompt').value = data.ingredients;
+            document.getElementById('recipe-output').classList.remove('loading')
+            generateRecipe();
         } else if (data.error) {
           document.getElementById('ingredientsList').innerHTML = '<p>Error: ' + data.error + '</p>';
+          document.getElementById('recipe-output').classList.remove('loading')
+
         }
       })
       .catch(error => {
         console.error('Error:', error);
         document.getElementById('ingredientsList').innerHTML = '<p>An error occurred while processing the video.</p>';
-      });
+        document.getElementById('recipe-output').classList.remove('loading')
+    });
+    loadingKitchen=false;
     });
 
     if (recipePrompt) {

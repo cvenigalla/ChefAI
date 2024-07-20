@@ -17,16 +17,17 @@
             <button id="vegan-button" class="recipe-button">🥗 Go Vegan</button>
         </div> 
 
-        <div id="recipe-output"></div>
+        <div id="recipe-output"> </div>
         <div id="input-area">
-            <input type="text" id="recipe-prompt" placeholder="Enter ingredients or type of dish...">
-            <button id="generate-button">Generate Recipe</button>	   
+            <h5>Upload a video of your kitchen to list ingredients</h5>
             <form id="videoUploadForm" enctype="multipart/form-data">
-              <input type="file" id="videoFile" name="video" accept="video/*" required>
-              <button type="submit">Upload and Analyze Kitchen</button>
+                <input type="file" id="videoFile" name="video" accept="video/*" required >
+                <button type="submit" id="submitVideo">Analyze Kitchen</button>
             </form>
-            <div id="ingredientsList">
-
+            <h5>Or simply type them out out</h5>
+            <div id="ingredient-prompt-area">
+                <textarea type="text" id="recipe-prompt" placeholder="Enter ingredients or type of dish..." ></textarea>
+                <button id="generate-button">Generate Recipe</button>	   
             </div>
 <div id="ingredientsList"></div>       
         </div>
@@ -37,7 +38,7 @@
         
         <div class="slider">
             <input type="range" min="1" max="5" value="1"  orient="vertical" class="slider-input" id="slider">
-           
+    
           </div>
           <output id="slider-value"></output>
           <img src="img/patrick.png">

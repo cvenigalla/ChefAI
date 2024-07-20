@@ -17,6 +17,17 @@ body {
     background-color: var(--coolor-brown-accent);
     color: var(--coolor-dark-main);
 }
+#recipe-output.loading #loading-spinner {
+    display: block;
+    position: absolute;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle fill="none" stroke-opacity="1" stroke="%23083D77" stroke-width=".5" cx="100" cy="100" r="0"><animate attributeName="r" calcMode="spline" dur="2" values="1;80" keyTimes="0;1" keySplines="0 .2 .5 1" repeatCount="indefinite"></animate><animate attributeName="stroke-width" calcMode="spline" dur="2" values="0;25" keyTimes="0;1" keySplines="0 .2 .5 1" repeatCount="indefinite"></animate><animate attributeName="stroke-opacity" calcMode="spline" dur="2" values="1;0" keyTimes="0;1" keySplines="0 .2 .5 1" repeatCount="indefinite"></animate></circle></svg>')
+}
+#loading-spinner {
+    display: none;
+}
+h5{
+    margin: 0
+}
 
 
 @keyframes slideBackground {
@@ -29,7 +40,7 @@ body {
   }
 
 #recipe-container {
-    width: 80%;
+    width: 80vw;
     max-width: 800px;
     background-color: var(--coolor-dark-main);
     color: var(--coolor-light-main);
@@ -42,13 +53,29 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+#videoFile{
+    width: 200px;
+}
+
+#submitVideo{
+    width: 200px;
+}
+
 h1 {
     text-align: center;
 }
 
-#input-area {
+#input-area{
     display: flex;
-    margin-bottom: 20px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#ingredient-prompt-area, #videoUploadForm{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #recipe-prompt {
@@ -105,6 +132,7 @@ h1 {
 }
 
 #recipe-output {
+    display: relative;
     white-space: pre-wrap;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
