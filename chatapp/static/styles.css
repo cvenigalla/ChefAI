@@ -1,0 +1,87 @@
+=body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+#recipe-container {
+    width: 80%;
+    max-width: 800px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+#input-area {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#recipe-prompt {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+#generate-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.recipe-button {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#spice-button {
+    background-color: #ff4500;
+}
+
+#simplify-button {
+    background-color: #3498db;
+}
+
+#fancy-button {
+    background-color: #9b59b6;
+}
+
+#vegan-button {
+    background-color: #2ecc71;
+}
+
+.recipe-button:hover {
+    opacity: 0.8;
+}
+
+#button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#recipe-output {
+    white-space: pre-wrap;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 3px;
+}
