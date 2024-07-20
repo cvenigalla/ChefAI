@@ -63,8 +63,8 @@ Your output should ONLY be a list of all of the ingredients."""
     logger.info('scanning upload')
     try:
         response = model.generate_content([system, vid],request_options={"timeout": 600})
-    except:
-        logger.error(f"An error occurred while analyzing file: {response}")
+    except Exception as e:
+        logger.error(f"An error occurred while analyzing file: {str(e)}")
         raise Exception('ingredient scan failed')
 
     logger.info('scanning completed successfully')
@@ -88,11 +88,11 @@ def analyze_kitchen():
     
     if video:
         video_path = os.path.join('temp', video.filename)
+        os.makedirs('temp', exist_ok=True)
         video.save(video_path)
         
         try:
             ingredients = generate_ingredient_list(video_path)
-
             return jsonify({"ingredients": ingredients})
         except Exception as e:
             return jsonify({"error": str(e)}), 500
