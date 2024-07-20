@@ -24,6 +24,85 @@ API_KEY = 'AIzaSyBGaL1HiIpz2oCbDqA0P2yOOV2XXLzZhbQ'
 def home():
     return app.send_static_file('index.html')
 
+
+#######VISION########################
+
+def ul_vid(path):
+
+    logger.info('configuring client')
+    key = userdata.get('gemini-api-key')
+    genai.configure(api_key=API_KEY)
+    logger.info('client configured')
+
+    logger.info('uploading file')
+    vid = genai.upload_file(path=path)
+    logger.info(f'upload complete with file at {vid.uri}')
+
+    logger.info('upload processing')
+    while vid.state.name == "PROCESSING":
+        time.sleep(0.25)
+        vid = genai.get_file(vid.name)
+    
+    if vid.state.name == "FAILED":
+        logger.error('file processing failed! file cannot be used for inference')
+        raise ValueError(video_file.state.name)
+
+    logger.info('upload ready for inference')
+    return vid
+
+
+def scan(vid):
+    model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest")
+    system = """You are assisting a personal chef.
+You will be given a video containing the contents of someone's kitchen.
+You may see a pantry or a fridge/freezer.
+Carefully scan through the footage and identify all of the ingredients you see.
+Your output should ONLY be a list of all of the ingredients."""
+
+    logger.info('scanning upload')
+    try:
+        response = model.generate_content([system, vid],request_options={"timeout": 600})
+    except:
+        logger.error(f"An error occurred while analyzing file: {response}")
+        raise Exception('ingredient scan failed')
+
+    logger.info('scanning completed successfully')
+    return response.text
+
+def generate_ingredient_list(video_path):
+    uploaded_vid = ul_vid(video_path)
+    ingredients = scan(uploaded_vid)
+    logger.info(f"ingredients detected by Gemini: {ingredients}")
+    return ingredients
+
+
+@app.route('/api/analyze_kitchen', methods=['POST'])
+def analyze_kitchen():
+    if 'video' not in request.files:
+        return jsonify({"error": "No video file provided"}), 400
+    
+    video = request.files['video']
+    if video.filename == '':
+        return jsonify({"error": "No selected video file"}), 400
+    
+    if video:
+        video_path = os.path.join('temp', video.filename)
+        video.save(video_path)
+        
+        try:
+            ingredients = generate_ingredient_list(video_path)
+
+            return jsonify({"ingredients": ingredients})
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+        finally:
+            # Clean up the temporary file
+            os.remove(video_path)
+    
+    return jsonify({"error": "Failed to process video"}), 500
+
+#####################################
+
 def generate_ai_response(prompt):
     try:
         response = model.generate_content(
