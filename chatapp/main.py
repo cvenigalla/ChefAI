@@ -4,6 +4,8 @@ from google.cloud import aiplatform
 import vertexai
 from vertexai.preview.generative_models import GenerativeModel
 import logging
+import time
+import google.generativeai as genai
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
@@ -30,7 +32,6 @@ def home():
 
 def ul_vid(path):
     logger.info('configuring client')
-    key = userdata.get('gemini-api-key')
     genai.configure(api_key=API_KEY)
     logger.info('client configured')
 
@@ -45,7 +46,7 @@ def ul_vid(path):
 
     if vid.state.name == "FAILED":
         logger.error('file processing failed! file cannot be used for inference')
-        raise ValueError(video_file.state.name)
+        raise ValueError(vid.state.name)
 
     logger.info('upload ready for inference')
     return vid
