@@ -1,7 +1,6 @@
 # ChefAI
 AI Cook Book Application
-testing 1st commit
 
-![image](https://github.com/user-attachments/assets/3916eb9f-451a-4f8d-a253-e3ad6ba7bfe3)
-
+## Evaluators:
+test videos can be found here: https://drive.google.com/drive/folders/1-3U5VI9aS8JpszrIM0uDwo35MdFU_QfM?usp=drive_link
 
