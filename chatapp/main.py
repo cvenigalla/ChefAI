@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from flask import Flask, request, jsonify, send_from_directory
 import os
 from google.cloud import aiplatform
@@ -343,5 +342,4 @@ def serve_static(path):
     return send_from_directory('static', path)
 
 if __name__ == '__main__':
->>>>>>> main
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
