@@ -17,6 +17,9 @@ LOCATION = "us-central1"
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 model = GenerativeModel("gemini-1.5-flash-001")
 
+#GREAT practice to commit api keys to git ¯\_(ツ)_/¯
+API_KEY = 'AIzaSyBGaL1HiIpz2oCbDqA0P2yOOV2XXLzZhbQ'
+
 @app.route('/')
 def home():
     return app.send_static_file('index.html')
