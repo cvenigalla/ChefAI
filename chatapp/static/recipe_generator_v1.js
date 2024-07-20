@@ -45,6 +45,31 @@ document.addEventListener('DOMContentLoaded', () => {
         spiceOutput.textContent = this.value; // Update the output text with slider value
     });
 
+    document.getElementById('videoUploadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      var formData = new FormData();
+      var videoFile = document.getElementById('videoFile').files[0];
+      formData.append('video', videoFile);
+
+      fetch('/api/analyze_kitchen', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.ingredients) {
+          document.getElementById('ingredientsList').innerHTML = '<h3>Ingredients Found:</h3><p>' + data.ingredients + '</p>';
+        } else if (data.error) {
+          document.getElementById('ingredientsList').innerHTML = '<p>Error: ' + data.error + '</p>';
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('ingredientsList').innerHTML = '<p>An error occurred while processing the video.</p>';
+      });
+    });
+
     if (recipePrompt) {
         recipePrompt.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {

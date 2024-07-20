@@ -25,7 +25,12 @@
         <div id="recipe-output"></div>
         <div id="input-area">
             <input type="text" id="recipe-prompt" placeholder="Enter ingredients or type of dish...">
-            <button id="generate-button">Generate Recipe</button>	          
+            <button id="generate-button">Generate Recipe</button>	   
+            <form id="videoUploadForm" enctype="multipart/form-data">
+              <input type="file" id="videoFile" name="video" accept="video/*" required>
+              <button type="submit">Upload and Analyze Kitchen</button>
+            </form>
+<div id="ingredientsList"></div>       
         </div>
     </div>
     <script src="recipe_generator_v1.js"></script>
