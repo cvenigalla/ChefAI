@@ -19,7 +19,9 @@ PROJECT_ID = "aitx-hack24aus-621"
 LOCATION = "us-central1"
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 model = GenerativeModel("gemini-1.5-flash-001")
-API_KEY = 0 #replace with env variable
+
+#GREAT practice to commit api keys to git ¯\_(ツ)_/¯ 
+API_KEY = 'AIzaSyBGaL1HiIpz2oCbDqA0P2yOOV2XXLzZhbQ'
 
 @app.route('/')
 def home():
@@ -95,6 +97,32 @@ Otherwise, format their input as a bulletted list.
 
     return ing + '\n' + response.text
 
+
+@app.route('/api/analyze_kitchen', methods=['POST'])
+def analyze_kitchen():
+    if 'video' not in request.files:
+        return jsonify({"error": "No video file provided"}), 400
+    
+    video = request.files['video']
+    if video.filename == '':
+        return jsonify({"error": "No selected video file"}), 400
+    
+    if video:
+        video_path = os.path.join('temp', video.filename)
+        video.save(video_path)
+        
+        try:
+            ingredients = generate_ingredient_list(video_path)
+            # Note: user_confirm function requires user input, which isn't suitable for a web API
+            # You might want to return the ingredients list and handle confirmation on the client side
+            return jsonify({"ingredients": ingredients})
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+        finally:
+            # Clean up the temporary file
+            os.remove(video_path)
+    
+    return jsonify({"error": "Failed to process video"}), 500
 
 #####################################
 
