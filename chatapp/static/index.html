@@ -28,21 +28,31 @@
             <div id="ingredient-prompt-area">
                 <textarea type="text" id="recipe-prompt" placeholder="Enter ingredients or type of dish..." ></textarea>
                 <button id="generate-button">Generate Recipe</button>	   
-            </div>
-<div id="ingredientsList"></div>       
+            </div>      
         </div>
     </div>
     <div id="complexity">
         
-        <img src="img/gordon.png">
-        
+        <img src="img/gordon.png"></img>
         <div class="slider">
             <input type="range" min="1" max="5" value="1"  orient="vertical" class="slider-input" id="slider">
-    
-          </div>
-          <output id="slider-value"></output>
-          <img src="img/patrick.png">
-          <h5 class="keep">Skill Level</h5>
+        </div>
+        <output id="slider-value"></output>
+        <img src="img/patrick.png"></img>
+        <h5 class="keep">Skill Level</h5>
+    </div>
+    <div id="sindarin">
+        <button id="sindarinToggle" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16" id="sindarinPlay">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16" id="sindarinPause">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0z"/>
+              </svg>
+        </button>
+    </div>
     <script src="recipe_generator_v1.js"></script>
 </body>
 </html>
