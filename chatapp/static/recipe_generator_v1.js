@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const recipePrompt = document.getElementById('recipe-prompt');
     const generateButton = document.getElementById('generate-button');
     const spiceButton = document.getElementById('spice-button');
+    const spiceSlider = document.getElementById('slider');
+    const spiceOutput = document.getElementById('slider-value');
+    spiceOutput.textContent = slider.value;
     const simplifyButton = document.getElementById('simplify-button');
     const fancyButton = document.getElementById('fancy-button');
     const veganButton = document.getElementById('vegan-button');
@@ -37,6 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
     addButtonListener(simplifyButton, () => modifyRecipe('simplify'));
     addButtonListener(fancyButton, () => modifyRecipe('fancy'));
     addButtonListener(veganButton, () => modifyRecipe('vegan'));
+
+    spiceSlider.addEventListener('input', function() {
+        spiceOutput.textContent = this.value; // Update the output text with slider value
+    });
 
     if (recipePrompt) {
         recipePrompt.addEventListener('keypress', (e) => {
@@ -72,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!currentRecipe) {
                     throw new Error("Received empty recipe from server");
                 }
-                recipeOutput.textContent = currentRecipe;
+                recipeOutput.innerHTML = marked.parse(currentRecipe);
                 console.log("Recipe generated, modification buttons can now be used");
             })
             .catch(error => {
