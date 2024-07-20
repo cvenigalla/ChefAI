@@ -14,10 +14,12 @@ app = Flask(__name__, static_url_path='/static', static_folder='static')
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Global vars
 PROJECT_ID = "aitx-hack24aus-621"
 LOCATION = "us-central1"
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 model = GenerativeModel("gemini-1.5-flash-001")
+API_KEY = 0 #replace with env variable
 
 @app.route('/')
 def home():
@@ -29,7 +31,7 @@ def ul_vid(path):
 
     logger.info('configuring client')
     key = userdata.get('gemini-api-key')
-    genai.configure(api_key=key)
+    genai.configure(api_key=API_KEY)
     logger.info('client configured')
 
     logger.info('uploading file')
@@ -49,12 +51,51 @@ def ul_vid(path):
     return vid
 
 
+def scan(vid):
+    model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest")
+    system = """You are assisting a personal chef.
+You will be given a video containing the contents of someone's kitchen.
+You may see a pantry or a fridge/freezer.
+Carefully scan through the footage and identify all of the ingredients you see.
+Your output should ONLY be a list of all of the ingredients."""
+
+    logger.info('scanning upload')
+    try:
+        response = model.generate_content([system, vid],request_options={"timeout": 600})
+    except:
+        logger.error(f"An error occurred while analyzing file: {response}")
+        raise Exception('ingredient scan failed')
+
+    logger.info('scanning completed successfully')
+    return response.text
 
 def generate_ingredient_list(video_path):
     uploaded_vid = ul_vid(video_path)
     ingredients = scan(uploaded_vid)
     logger.info(f"ingredients detected by Gemini: {ingredients}")
     return ingredients
+
+
+def user_confirm(ing):
+    print(f"Here's what I see:\n{ing}\n")
+    text = input("Anything you want to add?")
+
+    system = """
+You help me quickly process user input.
+The user has been asked if there's anything they want to add to a list.
+If they say they have nothing to add, respond "END OF LIST".
+Otherwise, format their input as a bulletted list.
+"""
+    model = genai.GenerativeModel(
+        model_name = 'gemini-1.5-flash',
+        system_instruction = system
+    )
+
+    response = model.generate_content(text)
+
+    return ing + '\n' + response.text
+
+
 #####################################
 
 def generate_ai_response(prompt):
