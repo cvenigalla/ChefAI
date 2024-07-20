@@ -11,8 +11,9 @@ app = Flask(__name__, static_url_path='/static', static_folder='static')
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-PROJECT_ID = "tidal-cirrus-429911-s5"
+PROJECT_ID = "aitx-hack24aus-621"
 LOCATION = "us-central1"
+
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 model = GenerativeModel("gemini-1.5-flash-001")
 
