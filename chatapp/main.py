@@ -20,7 +20,7 @@ LOCATION = "us-central1"
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 model = GenerativeModel("gemini-1.5-flash-001")
 
-#GREAT practice to commit api keys to git ¯\_(ツ)_/¯ 
+#GREAT practice to commit api keys to git ¯\_(ツ)_/¯
 API_KEY = 'AIzaSyBGaL1HiIpz2oCbDqA0P2yOOV2XXLzZhbQ'
 
 @app.route('/')
@@ -78,26 +78,6 @@ def generate_ingredient_list(video_path):
     return ingredients
 
 
-def user_confirm(ing):
-    print(f"Here's what I see:\n{ing}\n")
-    text = input("Anything you want to add?")
-
-    system = """
-You help me quickly process user input.
-The user has been asked if there's anything they want to add to a list.
-If they say they have nothing to add, respond "END OF LIST".
-Otherwise, format their input as a bulletted list.
-"""
-    model = genai.GenerativeModel(
-        model_name = 'gemini-1.5-flash',
-        system_instruction = system
-    )
-
-    response = model.generate_content(text)
-
-    return ing + '\n' + response.text
-
-
 @app.route('/api/analyze_kitchen', methods=['POST'])
 def analyze_kitchen():
     if 'video' not in request.files:
@@ -113,8 +93,7 @@ def analyze_kitchen():
         
         try:
             ingredients = generate_ingredient_list(video_path)
-            # Note: user_confirm function requires user input, which isn't suitable for a web API
-            # You might want to return the ingredients list and handle confirmation on the client side
+
             return jsonify({"ingredients": ingredients})
         except Exception as e:
             return jsonify({"error": str(e)}), 500
