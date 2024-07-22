@@ -175,4 +175,5 @@ document.addEventListener('DOMContentLoaded', () => {
             recipeOutput.textContent = 'Please generate a recipe first before modifying it.';
         }
     }
+
 });
