@@ -20,7 +20,7 @@ vertexai.init(project=PROJECT_ID, location=LOCATION)
 model = GenerativeModel("gemini-1.5-flash-001")
 
 # lol GREAT practice to commit api keys to git ¯\_(ツ)_/¯
-API_KEY = 'AIzaSyBGaL1HiIpz2oCbDqA0P2yOOV2XXLzZhbQ'
+API_KEY = 'ADD_API_KEY_HERE'
 
 
 @app.route('/')
